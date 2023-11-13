@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NetworkConfigurationService } from '../network-configuration.service';
 
 @Component({
   selector: 'app-neuron',
@@ -8,8 +9,10 @@ import { Component } from '@angular/core';
 export class NeuronComponent {
   potential: number;
   neuronNumber: number;
-  constructor() {
+  impulseDropoff: number;
+  constructor(networkConfig: NetworkConfigurationService) {
     this.potential = 0;
     this.neuronNumber = 1;
+    this.impulseDropoff = networkConfig.impulseDropoff;
   }
 }
