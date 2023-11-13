@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
-import { IConnectionInterface } from "./connection-interface";
+import { IConnection } from "./connection.interface";
+import { INeuron } from "./neuron.interface";
 
 @Injectable({
 	providedIn: 'root',
@@ -9,19 +10,21 @@ import { IConnectionInterface } from "./connection-interface";
  */
 export class NetworkConfigurationService {
 	impulseDropoff: number; //How quickly neuron discharges potential
-  private connectionsArray: Array<IConnectionInterface> = new Array<IConnectionInterface>(); //connections in Neural Network
+  private connectionsArray: Array<IConnection> = new Array<IConnection>(); //connections in Neural Network
+  private neuronsArray: Array<INeuron> = new Array<INeuron>(); //neurons in Neural Network
 	constructor() {
 		this.impulseDropoff = 1;
-    this.initializeConnections();
 	}
 
-  initializeConnections() {
-    this.connectionsArray = new Array<IConnectionInterface>();
+  addNeuron(layer: number) {
+    let neuron: INeuron = {
+      id: this.neuronsArray.length,
+      layer: layer
+    };
+    this.neuronsArray.push(neuron);
   }
 
-
-
-  addConnection(connection: IConnectionInterface) {
+  addConnection(connection: IConnection) {
     this.connectionsArray.push(connection);
   }
 
