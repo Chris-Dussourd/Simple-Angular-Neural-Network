@@ -16,12 +16,13 @@ export class NetworkConfigurationService {
 		this.impulseDropoff = 1;
 	}
 
-  addNeuron(layer: number) {
+  addNeuron(layer: number): INeuron {
     let neuron: INeuron = {
       id: this.neuronsArray.length,
       layer: layer
     };
     this.neuronsArray.push(neuron);
+    return neuron;
   }
 
   addConnection(connection: IConnection) {
@@ -30,8 +31,8 @@ export class NetworkConfigurationService {
 
 
 
-  updateConnectionWeight(inputNeuron: number, outputNeuron: number, newWeight: number) {
-    let connection = this.connectionsArray.find((x) => x.inputNeuron === inputNeuron && x.outputNeuon === outputNeuron);
+  updateConnectionWeight(inputNeuronId: number, outputNeuronId: number, newWeight: number) {
+    let connection = this.connectionsArray.find((x) => x.inputNeuron.id === inputNeuronId && x.outputNeuron.id === outputNeuronId);
     if (connection != undefined) connection.weight = newWeight;
   }
 }
