@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NetworkConfigurationService } from '../network-configuration.service';
 
 @Component({
-  selector: 'app-neuron',
+  selector: 'neuron',
   templateUrl: './neuron.component.html',
   styleUrls: ['./neuron.component.css']
 })

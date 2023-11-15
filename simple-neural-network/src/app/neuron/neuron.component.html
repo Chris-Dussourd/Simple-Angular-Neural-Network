@@ -1,1 +1,25 @@
-<p>neuron works!</p>
+
+<svg>
+  <circle class="neuron-hole"
+    cx="21"
+    cy="21"
+    r="15"
+    fill="#fff"></circle>
+
+  <circle class="neuron-ring"
+    cx="21"
+    cy="21"
+    r="15"
+    fill="transparent"
+    stroke="#d2d3d4"
+    stroke-width="3"></circle>
+
+  <circle class="neuron-potential"
+    cx="21"
+    cy="21"
+    r="15"
+    fill="transparent"
+    stroke="blue"
+    stroke-width="3"
+    [attr.stroke-dasharray]="potential + ' ' + (100 - potential)"></circle>
+</svg>
