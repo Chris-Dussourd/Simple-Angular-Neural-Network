@@ -7,3 +7,6 @@
 <neuron id="5" [layer]="this.neuron5.layer" [position]="this.neuron5.position"></neuron>
 <neuron id="6" [layer]="this.neuron6.layer" [position]="this.neuron6.position"></neuron>
 <neuron id="7" [layer]="this.neuron7.layer" [position]="this.neuron7.position"></neuron>
+<div *ngFor="let connect of connections">
+  <connection [neuronConnection]="connect"></connection>
+</div>

@@ -26,8 +26,14 @@ export class NetworkConfigurationService {
     return neuron;
   }
 
-  addConnection(connection: IConnection) {
+  addConnection(inputNeuron: INeuron, outputNeuron: INeuron, weight: number): IConnection {
+    let connection: IConnection = {
+      inputNeuron: inputNeuron,
+      outputNeuron: outputNeuron,
+      weight: weight
+    };
     this.connectionsArray.push(connection);
+    return connection;
   }
 
 

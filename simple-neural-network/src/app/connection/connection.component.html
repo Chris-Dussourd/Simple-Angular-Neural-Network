@@ -1,0 +1,13 @@
+<svg overflow="visible">
+  <line class="connection-line"
+    [attr.x1]="150*neuronConnection.inputNeuron.layer+230"
+    [attr.x2]="150*neuronConnection.outputNeuron.layer+170"
+    [attr.y1]="150*neuronConnection.inputNeuron.position+100"
+    [attr.y2]="150*neuronConnection.outputNeuron.position+100"
+    stroke="black"></line>
+  <circle class="connection-end"
+    [attr.cx]="150*neuronConnection.outputNeuron.layer+170"
+    [attr.cy]="150*neuronConnection.outputNeuron.position+100"
+    r="5"
+    stroke="black"></circle>
+</svg>
