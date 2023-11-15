@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NetworkConfigurationService } from '../network-configuration.service';
 
 @Component({
@@ -7,6 +7,8 @@ import { NetworkConfigurationService } from '../network-configuration.service';
   styleUrls: ['./neuron.component.css']
 })
 export class NeuronComponent {
+  @Input() layer: number;
+  @Input() position: number;
   potential: number;
   neuronNumber: number;
   impulseDropoff: number;

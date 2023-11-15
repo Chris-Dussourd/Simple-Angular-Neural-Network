@@ -16,10 +16,11 @@ export class NetworkConfigurationService {
 		this.impulseDropoff = 1;
 	}
 
-  addNeuron(layer: number): INeuron {
+  addNeuron(layer: number, position: number): INeuron {
     let neuron: INeuron = {
       id: this.neuronsArray.length,
-      layer: layer
+      layer: layer,
+      position: position
     };
     this.neuronsArray.push(neuron);
     return neuron;
