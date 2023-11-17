@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
-import { IConnection } from "./connection.interface";
-import { INeuron } from "./neuron.interface";
+import { Neuron } from "./neuron";
+import { BehaviorSubject } from "rxjs";
+import { Connection } from "./connection";
 
 @Injectable({
 	providedIn: 'root',
@@ -10,35 +11,29 @@ import { INeuron } from "./neuron.interface";
  */
 export class NetworkConfigurationService {
 	impulseDropoff: number; //How quickly neuron discharges potential
-  private connectionsArray: Array<IConnection> = new Array<IConnection>(); //connections in Neural Network
-  private neuronsArray: Array<INeuron> = new Array<INeuron>(); //neurons in Neural Network
+  private connectionsArray: Array<Connection> = new Array<Connection>(); //connections in Neural Network
+  private neuronsArray: Array<Neuron> = new Array<Neuron>(); //neurons in Neural Network
+  //Send out which neurons are being stimulated
+	private neuronStimulationSubject$ = new BehaviorSubject<Connection>(new Connection(new Neuron(-1, -1, -1), new Neuron(-1, -1, -1),  0));
 	constructor() {
 		this.impulseDropoff = 1;
 	}
 
-  addNeuron(layer: number, position: number): INeuron {
-    let neuron: INeuron = {
-      id: this.neuronsArray.length,
-      layer: layer,
-      position: position
-    };
+  addNeuron(layer: number, position: number): Neuron {
+    let neuron = new Neuron(this.neuronsArray.length, layer, position);
     this.neuronsArray.push(neuron);
     return neuron;
   }
 
-  addConnection(inputNeuron: INeuron, outputNeuron: INeuron, weight: number): IConnection {
-    let connection: IConnection = {
-      inputNeuron: inputNeuron,
-      outputNeuron: outputNeuron,
-      weight: weight
-    };
+  addConnection(inputNeuron: Neuron, outputNeuron: Neuron, weight: number): Connection {
+    let connection = new Connection(inputNeuron, outputNeuron, weight);
     this.connectionsArray.push(connection);
     return connection;
   }
 
 
 
-  updateConnectionWeight(connection: IConnection, newWeight: number) {
+  updateConnectionWeight(connection: Connection, newWeight: number) {
     if (connection != undefined) connection.weight = +newWeight;
   }
 }
