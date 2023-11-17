@@ -37,11 +37,10 @@ export class NetworkConfigurationService {
   }
 
   fireNeuron(neuronId: number) {
-    let stimulatedConnections = this.connectionsArray.filter((connection) => {
-      connection.inputNeuron.id === neuronId
-    });
-    stimulatedConnections.forEach((connection) => {
-      this.neuronStimulationSubject$.next(connection);
-    });
+    this.connectionsArray
+      .filter((connection) => connection.inputNeuron.id === neuronId)
+      .forEach((connection) => {
+        this.neuronStimulationSubject$.next(connection);
+      });
   }
 }

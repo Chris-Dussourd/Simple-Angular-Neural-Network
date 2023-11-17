@@ -25,4 +25,9 @@
     stroke-width="3"
     [attr.stroke-dasharray]="potential + ' ' + (100 - potential)"></circle>
 </svg>
+<p [ngStyle]="{
+  'position': 'relative',
+  'top.px': 150*neuron.position - 78,
+  'left.px': 150*neuron.layer+192
+}">{{ potential }}</p>
 

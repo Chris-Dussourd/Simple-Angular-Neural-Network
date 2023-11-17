@@ -1,4 +1,20 @@
 <router-outlet></router-outlet>
+<button type="button" (click)="stimulateBaseNeuron($event)"
+  [ngStyle]="{
+    'position': 'relative',
+    'top.px': 150,
+    'left.px': 310
+  }"
+>Stimulate First Neuron</button>
+<input [(ngModel)]="baseWeight" (keyup.enter)="updateBaseWeight($event)" (blur)="updateBaseWeight($event)"
+  [ngStyle]="{
+    'background-color': 'green',
+    'color': 'white',
+    'position': 'relative',
+    'top.px': 150,
+    'left.px': 340,
+    'width.px': 25
+  }"/>
 <neuron id="0" [neuron]="this.neuron0"></neuron>
 <neuron id="1" [neuron]="this.neuron1"></neuron>
 <neuron id="2" [neuron]="this.neuron2"></neuron>

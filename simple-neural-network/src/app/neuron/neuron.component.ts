@@ -25,6 +25,12 @@ export class NeuronComponent {
 		this.stimulationSubscription = this.networkConfig.neuronStimulation$.subscribe((connection: Connection) => {
 				if (connection.outputNeuron.id === this.neuron.id) {
           this.potential = this.potential + connection.weight*100;
+          setTimeout(() => {
+              if (this.potential >= 100) {
+                this.potential = 0;
+                this.networkConfig.fireNeuron(this.neuron.id);
+            }
+          }, 2000);
         }
 			});
     }

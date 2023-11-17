@@ -14,6 +14,7 @@
 <input [(ngModel)]="weight" (keyup.enter)="updateWeight($event)" (blur)="updateWeight($event)"
   [ngStyle]="{
     'background-color': 'green',
+    'color': 'white',
     'position': 'relative',
     'top.px': 50*(neuronConnection.outputNeuron.position+2*neuronConnection.inputNeuron.position)-50,
     'left.px': 150*(neuronConnection.inputNeuron.layer) - 60,
