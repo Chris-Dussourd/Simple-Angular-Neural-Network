@@ -38,8 +38,7 @@ export class NetworkConfigurationService {
 
 
 
-  updateConnectionWeight(inputNeuronId: number, outputNeuronId: number, newWeight: number) {
-    let connection = this.connectionsArray.find((x) => x.inputNeuron.id === inputNeuronId && x.outputNeuron.id === outputNeuronId);
-    if (connection != undefined) connection.weight = newWeight;
+  updateConnectionWeight(connection: IConnection, newWeight: number) {
+    if (connection != undefined) connection.weight = +newWeight;
   }
 }

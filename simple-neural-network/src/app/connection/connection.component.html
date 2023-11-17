@@ -11,3 +11,11 @@
     r="5"
     stroke="black"></circle>
 </svg>
+<input [(ngModel)]="weight" (keyup.enter)="updateWeight($event)" (blur)="updateWeight($event)"
+  [ngStyle]="{
+    'background-color': 'green',
+    'position': 'relative',
+    'top.px': 50*(neuronConnection.outputNeuron.position+2*neuronConnection.inputNeuron.position)-50,
+    'left.px': 150*(neuronConnection.inputNeuron.layer) - 60,
+    'width.px': 25
+  }"/>

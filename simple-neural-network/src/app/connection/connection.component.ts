@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { IConnection } from '../connection.interface';
+import { NetworkConfigurationService } from '../network-configuration.service';
 
 @Component({
   selector: 'connection',
@@ -8,4 +9,13 @@ import { IConnection } from '../connection.interface';
 })
 export class ConnectionComponent {
   @Input() neuronConnection: IConnection;
+  weight: number;
+
+  constructor(private networkConfig: NetworkConfigurationService) {
+    this.weight = 1;
+  }
+
+  updateWeight(event: any) { // without type info
+    this.networkConfig.updateConnectionWeight(this.neuronConnection, this.weight)
+  }
 }
