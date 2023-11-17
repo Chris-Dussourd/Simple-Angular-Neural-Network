@@ -1,15 +1,15 @@
 
 <svg overflow="visible">
   <circle class="neuron-hole"
-    [attr.cx]="150*layer+200"
-    [attr.cy]="150*position+100"
+    [attr.cx]="150*neuron.layer+200"
+    [attr.cy]="150*neuron.position+100"
     cy="50"
     r="30"
     fill="#fff"></circle>
 
   <circle class="neuron-ring"
-    [attr.cx]="150*layer+200"
-    [attr.cy]="150*position+100"
+    [attr.cx]="150*neuron.layer+200"
+    [attr.cy]="150*neuron.position+100"
     cy="50"
     r="30"
     fill="transparent"
@@ -17,11 +17,12 @@
     stroke-width="3"></circle>
 
   <circle class="neuron-potential"
-    [attr.cx]="150*layer+200"
-    [attr.cy]="150*position+100"
+    [attr.cx]="150*neuron.layer+200"
+    [attr.cy]="150*neuron.position+100"
     r="30"
     fill="transparent"
     stroke="blue"
     stroke-width="3"
     [attr.stroke-dasharray]="potential + ' ' + (100 - potential)"></circle>
 </svg>
+

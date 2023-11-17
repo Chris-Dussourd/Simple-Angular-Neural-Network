@@ -15,6 +15,7 @@ export class NetworkConfigurationService {
   private neuronsArray: Array<Neuron> = new Array<Neuron>(); //neurons in Neural Network
   //Send out which neurons are being stimulated
 	private neuronStimulationSubject$ = new BehaviorSubject<Connection>(new Connection(new Neuron(-1, -1, -1), new Neuron(-1, -1, -1),  0));
+	neuronStimulation$ = this.neuronStimulationSubject$.asObservable();
 	constructor() {
 		this.impulseDropoff = 1;
 	}
@@ -31,9 +32,16 @@ export class NetworkConfigurationService {
     return connection;
   }
 
-
-
   updateConnectionWeight(connection: Connection, newWeight: number) {
     if (connection != undefined) connection.weight = +newWeight;
+  }
+
+  fireNeuron(neuronId: number) {
+    let stimulatedConnections = this.connectionsArray.filter((connection) => {
+      connection.inputNeuron.id === neuronId
+    });
+    stimulatedConnections.forEach((connection) => {
+      this.neuronStimulationSubject$.next(connection);
+    });
   }
 }

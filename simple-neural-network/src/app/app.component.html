@@ -1,12 +1,12 @@
 <router-outlet></router-outlet>
-<neuron id="0" [layer]="this.neuron0.layer" [position]="this.neuron0.position"></neuron>
-<neuron id="1" [layer]="this.neuron1.layer" [position]="this.neuron1.position"></neuron>
-<neuron id="2" [layer]="this.neuron2.layer" [position]="this.neuron2.position"></neuron>
-<neuron id="3" [layer]="this.neuron3.layer" [position]="this.neuron3.position"></neuron>
-<neuron id="4" [layer]="this.neuron4.layer" [position]="this.neuron4.position"></neuron>
-<neuron id="5" [layer]="this.neuron5.layer" [position]="this.neuron5.position"></neuron>
-<neuron id="6" [layer]="this.neuron6.layer" [position]="this.neuron6.position"></neuron>
-<neuron id="7" [layer]="this.neuron7.layer" [position]="this.neuron7.position"></neuron>
+<neuron id="0" [neuron]="this.neuron0"></neuron>
+<neuron id="1" [neuron]="this.neuron1"></neuron>
+<neuron id="2" [neuron]="this.neuron2"></neuron>
+<neuron id="3" [neuron]="this.neuron3"></neuron>
+<neuron id="4" [neuron]="this.neuron4"></neuron>
+<neuron id="5" [neuron]="this.neuron5"></neuron>
+<neuron id="6" [neuron]="this.neuron6"></neuron>
+<neuron id="7" [neuron]="this.neuron7"></neuron>
 <div *ngFor="let connect of connections">
   <connection [neuronConnection]="connect"></connection>
 </div>

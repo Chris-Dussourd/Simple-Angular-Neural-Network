@@ -1,5 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { NetworkConfigurationService } from '../network-configuration.service';
+import { Subscription } from 'rxjs';
+import { Connection } from '../connection';
+import { Neuron } from '../neuron';
 
 @Component({
   selector: 'neuron',
@@ -7,14 +10,22 @@ import { NetworkConfigurationService } from '../network-configuration.service';
   styleUrls: ['./neuron.component.css']
 })
 export class NeuronComponent {
-  @Input() layer: number;
-  @Input() position: number;
+  @Input() neuron: Neuron;
   potential: number;
   neuronNumber: number;
   impulseDropoff: number;
-  constructor(networkConfig: NetworkConfigurationService) {
+	stimulationSubscription: Subscription;
+  constructor(private networkConfig: NetworkConfigurationService) {
     this.potential = 0;
     this.neuronNumber = 1;
     this.impulseDropoff = networkConfig.impulseDropoff;
   }
+
+	ngOnInit(): void {
+		this.stimulationSubscription = this.networkConfig.neuronStimulation$.subscribe((connection: Connection) => {
+				if (connection.outputNeuron.id === this.neuron.id) {
+          this.potential = this.potential + connection.weight*100;
+        }
+			});
+    }
 }
