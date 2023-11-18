@@ -4,9 +4,9 @@ import { INeuron } from '../neuron.interface';
 import { IConnection } from '../connection.interface';
 
 @Component({
-  selector: 'part1network',
-  templateUrl: './part1network.component.html',
-  styleUrls: ['./part1network.component.css']
+  selector: 'part1-network',
+  templateUrl: './part1-network.component.html',
+  styleUrls: ['./part1-network.component.css']
 })
 export class Part1Network {
   title = 'simple-neural-network';

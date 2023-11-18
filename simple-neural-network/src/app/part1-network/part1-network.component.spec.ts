@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Part1Network } from './part1network.component';
+import { Part1Network } from './part1-network.component';
 
 describe('Part1Network', () => {
   beforeEach(async () => {
