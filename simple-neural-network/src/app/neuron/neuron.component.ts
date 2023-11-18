@@ -30,7 +30,7 @@ export class NeuronComponent {
                 this.potential = 0;
                 this.networkConfig.fireNeuron(this.neuron.id);
             }
-          }, 2000);
+          }, 500);
         }
 			});
     }

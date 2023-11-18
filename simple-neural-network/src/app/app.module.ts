@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NeuronComponent } from './neuron/neuron.component';
 import { ConnectionComponent } from './connection/connection.component';
@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
+    routingComponents,
     NeuronComponent,
     ConnectionComponent
   ],
