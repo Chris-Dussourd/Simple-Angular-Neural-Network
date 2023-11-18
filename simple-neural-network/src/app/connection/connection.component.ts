@@ -9,6 +9,8 @@ import { NetworkConfigurationService } from '../network-configuration.service';
 })
 export class ConnectionComponent {
   @Input() neuronConnection: IConnection;
+  @Input() marginLeft: number = 0;
+  @Input() marginTop: number = 0;
   weight: number;
 
   constructor(private networkConfig: NetworkConfigurationService) {

@@ -11,6 +11,8 @@ import { Neuron } from '../neuron';
 })
 export class NeuronComponent {
   @Input() neuron: Neuron;
+  @Input() marginLeft: number = 0;
+  @Input() marginTop: number = 0;
   potential: number;
   neuronNumber: number;
   impulseDropoff: number;

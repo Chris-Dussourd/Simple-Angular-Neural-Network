@@ -1,8 +1,19 @@
+<div [ngStyle]="{ 'width': '700px' }">
+  <h1 style="text-align:center">Part 1</h1>
+  <p>This is a basic neural network with 4 layers and 8 neurons.  Each circle represents a neuron. The number in the middle is the neuron's potential. Lines between each neurons represent a 'connection'.
+    Neurons in layer 1 connect to neurons in layer 2.  Neurons in layer 2 connect to neurons in layer 3 and so on.
+  </p>
+  <p>When you stimulate the first neuron, it raises it's potential. Once a neuron potential reaches 100, it will 'fire', which causes the neurons that it is connected to to be stimulated and raise in potential.
+    There is a short delay before firing to make it easier to display the cascading effect in action. The text box with the green color represents the 'weight' between neurons.
+    How much will one neuron stimulate another neuron when it fires? Try adjusting these weights to see the effect on the network.
+  </p>
+</div>
+
 <button type="button" (click)="stimulateBaseNeuron($event)"
   [ngStyle]="{
     'position': 'relative',
-    'top.px': 150,
-    'left.px': 310
+    'left.px': 210,
+    'top.px': 20
   }"
 >Stimulate First Neuron</button>
 <input [(ngModel)]="baseWeight" (keyup.enter)="updateBaseWeight($event)" (blur)="updateBaseWeight($event)"
@@ -10,18 +21,19 @@
     'background-color': 'green',
     'color': 'white',
     'position': 'relative',
-    'top.px': 150,
-    'left.px': 340,
-    'width.px': 25
+    'left.px': 240,
+    'width.px': 25,
+    'top.px': 20
   }"/>
-<neuron id="0" [neuron]="this.neuron0"></neuron>
-<neuron id="1" [neuron]="this.neuron1"></neuron>
-<neuron id="2" [neuron]="this.neuron2"></neuron>
-<neuron id="3" [neuron]="this.neuron3"></neuron>
-<neuron id="4" [neuron]="this.neuron4"></neuron>
-<neuron id="5" [neuron]="this.neuron5"></neuron>
-<neuron id="6" [neuron]="this.neuron6"></neuron>
-<neuron id="7" [neuron]="this.neuron7"></neuron>
+<div *ngFor="let neuron of neurons">
+  <neuron [neuron]="neuron" [marginLeft]="100" [marginTop]="200"></neuron>
+</div>
 <div *ngFor="let connect of connections">
-  <connection [neuronConnection]="connect"></connection>
+  <connection [neuronConnection]="connect" [marginLeft]="100" [marginTop]="200"></connection>
+</div>
+<div [ngStyle]="{ 'position': 'relative', 'top.px': 420, 'left.px': 60, 'font-weight': 'bold' }">
+  <span>Layer 1</span>
+  <span style="padding-left:100px">Layer 2</span>
+  <span style="padding-left:100px">Layer 3</span>
+  <span style="padding-left:100px">Layer 4</span>
 </div>

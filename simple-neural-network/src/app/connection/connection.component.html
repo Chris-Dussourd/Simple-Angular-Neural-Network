@@ -1,13 +1,13 @@
 <svg overflow="visible">
   <line class="connection-line"
-    [attr.x1]="150*neuronConnection.inputNeuron.layer+230"
-    [attr.x2]="150*neuronConnection.outputNeuron.layer+170"
-    [attr.y1]="150*neuronConnection.inputNeuron.position+100"
-    [attr.y2]="150*neuronConnection.outputNeuron.position+100"
+    [attr.x1]="150*neuronConnection.inputNeuron.layer+marginLeft+30"
+    [attr.x2]="150*neuronConnection.outputNeuron.layer+marginLeft-30"
+    [attr.y1]="150*neuronConnection.inputNeuron.position+marginTop"
+    [attr.y2]="150*neuronConnection.outputNeuron.position+marginTop"
     stroke="black"></line>
   <circle class="connection-end"
-    [attr.cx]="150*neuronConnection.outputNeuron.layer+170"
-    [attr.cy]="150*neuronConnection.outputNeuron.position+100"
+    [attr.cx]="150*neuronConnection.outputNeuron.layer+marginLeft-30"
+    [attr.cy]="150*neuronConnection.outputNeuron.position+marginTop"
     r="5"
     stroke="black"></circle>
 </svg>
@@ -16,7 +16,7 @@
     'background-color': 'green',
     'color': 'white',
     'position': 'relative',
-    'top.px': 50*(neuronConnection.outputNeuron.position+2*neuronConnection.inputNeuron.position)-50,
-    'left.px': 150*(neuronConnection.inputNeuron.layer) - 60,
+    'top.px': 50*(neuronConnection.outputNeuron.position+2*neuronConnection.inputNeuron.position)+marginTop-150,
+    'left.px': 150*(neuronConnection.inputNeuron.layer)+marginLeft - 260,
     'width.px': 25
   }"/>

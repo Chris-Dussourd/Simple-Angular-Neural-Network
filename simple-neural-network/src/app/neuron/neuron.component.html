@@ -1,24 +1,22 @@
 
 <svg overflow="visible">
   <circle class="neuron-hole"
-    [attr.cx]="150*neuron.layer+200"
-    [attr.cy]="150*neuron.position+100"
-    cy="50"
+    [attr.cx]="150*neuron.layer+marginLeft"
+    [attr.cy]="150*neuron.position+marginTop"
     r="30"
     fill="#fff"></circle>
 
   <circle class="neuron-ring"
-    [attr.cx]="150*neuron.layer+200"
-    [attr.cy]="150*neuron.position+100"
-    cy="50"
+    [attr.cx]="150*neuron.layer+marginLeft"
+    [attr.cy]="150*neuron.position+marginTop"
     r="30"
     fill="transparent"
     stroke="#d2d3d4"
     stroke-width="3"></circle>
 
   <circle class="neuron-potential"
-    [attr.cx]="150*neuron.layer+200"
-    [attr.cy]="150*neuron.position+100"
+    [attr.cx]="150*neuron.layer+marginLeft"
+    [attr.cy]="150*neuron.position+marginTop"
     r="30"
     fill="transparent"
     stroke="blue"
@@ -27,7 +25,7 @@
 </svg>
 <p [ngStyle]="{
   'position': 'relative',
-  'top.px': 150*neuron.position - 78,
-  'left.px': 150*neuron.layer+192
+  'top.px': 150*neuron.position + marginTop - 178,
+  'left.px': 150*neuron.layer+marginLeft-8
 }">{{ potential }}</p>
 
