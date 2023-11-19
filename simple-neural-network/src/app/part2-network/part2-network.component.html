@@ -5,28 +5,40 @@
   <p>In addition, you can remove the added neurons by selecting the neuron and clicking the trash can icon.</p>
   <p>Lastly, you can add connections to your new neurons. First select one neuron, select a second neuron, and then click "Add Connection".
     Click a neuron second time to de-select it. Note: You can now add connections to neurons a few layers ahead or within the same layer.</p>
-  <button type="button" (click)="stimulateBaseNeuron($event)"
-    [ngStyle]="{
-      'position': 'relative',
-      'left.px': 210,
-      'top.px': 30
-    }"
-  >Stimulate First Neuron</button>
-  <input [(ngModel)]="baseWeight" (keyup.enter)="updateBaseWeight($event)" (blur)="updateBaseWeight($event)"
-    [ngStyle]="{
-      'background-color': 'green',
-      'color': 'white',
-      'position': 'relative',
-      'left.px': 240,
-      'width.px': 25,
-      'top.px': 30
-    }"/>
-  <div [ngStyle]="{ 'position': 'relative', 'top.px': 440, 'left.px': 60, 'font-weight': 'bold' }">
-    <span>Layer 1</span>
-    <span style="padding-left:100px">Layer 2</span>
-    <span style="padding-left:100px">Layer 3</span>
-    <span style="padding-left:100px">Layer 4</span>
-  </div>
+</div>
+<button type="button" (click)="stimulateBaseNeuron($event)"
+  [ngStyle]="{
+    'position': 'relative',
+    'left.px': 210,
+    'top.px': 30
+  }"
+>Stimulate First Neuron</button>
+<input [(ngModel)]="baseWeight" (keyup.enter)="updateBaseWeight($event)" (blur)="updateBaseWeight($event)"
+  [ngStyle]="{
+    'background-color': 'green',
+    'color': 'white',
+    'position': 'relative',
+    'left.px': 240,
+    'width.px': 25,
+    'top.px': 30
+  }"/>
+<button (click)="addLayer($event)"
+  [ngStyle]="{
+    'position': 'fixed',
+    'height.px': neurons.length*45,
+    'margin-left.px': (layers.length-1)*150,
+    'margin-top.px': 70,
+    'background-color': 'light-grey'
+  }">Add Layer
+</button>
+<div [ngStyle]="{ 'position': 'relative', 'top.px': 440, 'left.px': -40, 'font-weight': 'bold' }">
+  <span *ngFor="let layer of layers">
+    <span [ngStyle]="{ 'padding-left.px': 100 }">Layer {{layer}}</span>
+  </span>
+  <br>
+  <span *ngFor="let layer of layers">
+    <button [id]=layer (click)="removeLayer($event)" [ngStyle]="{ 'margin-left.px': 90 }">Remove</button>
+  </span>
 </div>
 <div *ngFor="let neuron of neurons">
   <neuron [neuron]="neuron" [marginLeft]="100" [marginTop]="220"></neuron>

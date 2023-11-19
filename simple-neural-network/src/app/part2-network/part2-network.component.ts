@@ -14,7 +14,7 @@ export class Part2Network {
   baseWeight: number; //weight between button and neuron0
   neurons: Array<INeuron> = []
   connections: Array<IConnection> = [];
-  poop = [1,2,3];
+  layers = [1,2,3,4];
   constructor(private networkConfig: NetworkConfigurationService) {
     this.baseWeight = 1;
     this.buttonNeuron = networkConfig.addNeuron(0, 2);
@@ -32,12 +32,12 @@ export class Part2Network {
     //Add connection to stimlate base neuron with a button
     this.baseConnection = networkConfig.addConnection(this.buttonNeuron, this.neurons[0], this.baseWeight);
 
-    //Add connections from 1st layer to 1st layer
+    //Add connections from 1st layer to 2nd layer
     this.connections.push(networkConfig.addConnection(this.neurons[0], this.neurons[1], 1));
     this.connections.push(networkConfig.addConnection(this.neurons[0], this.neurons[2], 1));
     this.connections.push(networkConfig.addConnection(this.neurons[0], this.neurons[3], 1));
 
-    //Add connections from 1st layer to 2nd layer
+    //Add connections from 2nd layer to 3rd layer
     this.connections.push(networkConfig.addConnection(this.neurons[1], this.neurons[4], 1));
     this.connections.push(networkConfig.addConnection(this.neurons[1], this.neurons[5], 1));
     this.connections.push(networkConfig.addConnection(this.neurons[2], this.neurons[4], 1));
@@ -46,7 +46,7 @@ export class Part2Network {
     this.connections.push(networkConfig.addConnection(this.neurons[3], this.neurons[5], 1));
     this.connections.push(networkConfig.addConnection(this.neurons[3], this.neurons[6], 1));
 
-    //Add connections from 2nd layer to 3rd layer
+    //Add connections from 3rd layer to 4th layer
     this.connections.push(networkConfig.addConnection(this.neurons[4], this.neurons[7], 1));
     this.connections.push(networkConfig.addConnection(this.neurons[5], this.neurons[7], 1));
     this.connections.push(networkConfig.addConnection(this.neurons[6], this.neurons[7], 1));
@@ -58,5 +58,26 @@ export class Part2Network {
 
   stimulateBaseNeuron(event: any) {
     this.networkConfig.fireNeuron(this.buttonNeuron.id)
+  }
+
+  addLayer(event: any) {
+    this.layers.push(this.layers.length+1)
+  }
+
+  removeLayer(event: any) {
+    let currentLayer = +event.currentTarget.id
+    //Remove neurons in the current layer
+    this.neurons.forEach((neuron) => {
+      if (neuron.layer === currentLayer) {
+        this.removeNeuron({ currentTarget: { id: neuron.id }})
+      }
+    })
+    this.layers.forEach((layer) => {
+      if (layer >= currentLayer) layer = layer - 1;
+    })
+    this.layers.pop();
+  }
+
+  removeNeuron(event: any) {
   }
 }

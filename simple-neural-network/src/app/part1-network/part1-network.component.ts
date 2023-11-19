@@ -14,7 +14,6 @@ export class Part1Network {
   baseWeight: number; //weight between button and neuron0
   neurons: Array<INeuron> = []
   connections: Array<IConnection> = [];
-  poop = [1,2,3];
   constructor(private networkConfig: NetworkConfigurationService) {
     this.baseWeight = 1;
     this.buttonNeuron = networkConfig.addNeuron(0, 2);

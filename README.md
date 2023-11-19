@@ -23,7 +23,7 @@ graph LR;
   Neuron7-->Neuron8;
 ```
 
-The user presses a button to signal stimalating neuron 1 in layer 1. This processes continues down the chain of layers and eventually stimulates neuron 7.
+The user presses a button to signal stimalating neuron 1 in layer 1. If the neuron fires, this stimulates neuron 2, neuron 3, and neuron 4 in layer 2. The processes continues down the chain of layers and eventually stimulates neuron 8.
 
 On press of the button, the neuron will either be stimulated to fire and thus cause it to stimulate other neurons down the chain or will not reach enough potential to cause a fire event.
 
