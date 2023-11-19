@@ -1,21 +1,21 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Part1Network } from './part1-network.component';
+import { Part2Network } from './part2-network.component';
 
-describe('Part1Network', () => {
+describe('Part2Network', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
         RouterTestingModule
       ],
       declarations: [
-        Part1Network
+        Part2Network
       ],
     }).compileComponents();
   });
 
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(Part1Network);
+    const fixture = TestBed.createComponent(Part2Network);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
   });

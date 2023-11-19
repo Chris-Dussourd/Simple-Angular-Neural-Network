@@ -4,11 +4,11 @@ import { INeuron } from '../neuron.interface';
 import { IConnection } from '../connection.interface';
 
 @Component({
-  selector: 'part1-network',
-  templateUrl: './part1-network.component.html',
-  styleUrls: ['./part1-network.component.css']
+  selector: 'part2-network',
+  templateUrl: './part2-network.component.html',
+  styleUrls: ['./part2-network.component.css']
 })
-export class Part1Network {
+export class Part2Network {
   buttonNeuron: INeuron;
   baseConnection: IConnection; //connection between button and neuron0
   baseWeight: number; //weight between button and neuron0
