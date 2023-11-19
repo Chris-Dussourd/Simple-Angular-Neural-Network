@@ -8,33 +8,35 @@
     There is a short delay before firing to make it easier to display the cascading effect in action. The text box with the green color represents the 'weight' between neurons.
     How much will one neuron stimulate another neuron when it fires? Try adjusting these weights to see the effect on the network.
   </p>
-  <button type="button" (click)="stimulateBaseNeuron($event)"
-    [ngStyle]="{
-      'position': 'relative',
-      'left.px': 210,
-      'top.px': 10
-    }"
-  >Stimulate First Neuron</button>
-  <input [(ngModel)]="baseWeight" (keyup.enter)="updateBaseWeight($event)" (blur)="updateBaseWeight($event)"
-    [ngStyle]="{
-      'background-color': 'green',
-      'color': 'white',
-      'position': 'relative',
-      'left.px': 240,
-      'width.px': 25,
-      'top.px': 10
-    }"/>
-  <div *ngFor="let neuron of neurons">
-    <neuron [neuron]="neuron" [marginLeft]="100" [marginTop]="220"></neuron>
-  </div>
-  <div *ngFor="let connect of connections">
-    <connection [neuronConnection]="connect" [marginLeft]="100" [marginTop]="220"></connection>
-  </div>
-  <div [ngStyle]="{ 'position': 'relative', 'top.px': 420, 'left.px': 60, 'font-weight': 'bold' }">
-    <span>Layer 1</span>
-    <span style="padding-left:100px">Layer 2</span>
-    <span style="padding-left:100px">Layer 3</span>
-    <span style="padding-left:100px">Layer 4</span>
+  <div *ngIf="loaded">
+    <button type="button" (click)="stimulateBaseNeuron($event)"
+      [ngStyle]="{
+        'position': 'relative',
+        'left.px': 210,
+        'top.px': 10
+      }"
+    >Stimulate First Neuron</button>
+    <input [(ngModel)]="baseWeight" (keyup.enter)="updateBaseWeight($event)" (blur)="updateBaseWeight($event)"
+      [ngStyle]="{
+        'background-color': 'green',
+        'color': 'white',
+        'position': 'relative',
+        'left.px': 240,
+        'width.px': 25,
+        'top.px': 10
+      }"/>
+    <div *ngFor="let neuron of neurons">
+      <neuron [neuron]="neuron" [marginLeft]="-50" [marginTop]="220" [maxNeuronsInLayer]="maxNeuronsInLayer"></neuron>
+    </div>
+    <div *ngFor="let connect of connections">
+      <connection [neuronConnection]="connect" [marginLeft]="-50" [marginTop]="220" [maxNeuronsInLayer]="maxNeuronsInLayer"></connection>
+    </div>
+    <div [ngStyle]="{ 'position': 'relative', 'top.px': 420, 'left.px': 60, 'font-weight': 'bold' }">
+      <span>Layer 1</span>
+      <span style="padding-left:100px">Layer 2</span>
+      <span style="padding-left:100px">Layer 3</span>
+      <span style="padding-left:100px">Layer 4</span>
+    </div>
   </div>
 </div>
 

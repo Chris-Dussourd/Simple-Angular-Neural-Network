@@ -1,13 +1,13 @@
 <svg overflow="visible">
   <line class="connection-line"
-    [attr.x1]="150*neuronConnection.inputNeuron.layer+marginLeft+30"
-    [attr.x2]="150*neuronConnection.outputNeuron.layer+marginLeft-30"
-    [attr.y1]="150*neuronConnection.inputNeuron.position+marginTop"
-    [attr.y2]="150*neuronConnection.outputNeuron.position+marginTop"
+    [attr.x1]="connectionX1"
+    [attr.x2]="connectionX2"
+    [attr.y1]="connectionY1"
+    [attr.y2]="connectionY2"
     stroke="black"></line>
   <circle class="connection-end"
-    [attr.cx]="150*neuronConnection.outputNeuron.layer+marginLeft-30"
-    [attr.cy]="150*neuronConnection.outputNeuron.position+marginTop"
+    [attr.cx]="connectionX2"
+    [attr.cy]="connectionY2"
     r="5"
     stroke="black"></circle>
 </svg>
@@ -15,8 +15,8 @@
   [ngStyle]="{
     'background-color': 'green',
     'color': 'white',
-    'position': 'relative',
-    'top.px': 50*(neuronConnection.outputNeuron.position+2*neuronConnection.inputNeuron.position)+marginTop-150,
-    'left.px': 150*(neuronConnection.inputNeuron.layer)+marginLeft - 260,
+    'position': 'fixed',
+    'top.px': connectionY1 + (connectionY2 - connectionY1)/5 - 12,
+    'left.px': connectionX1 + (connectionX2 - connectionX1)/5,
     'width.px': 25
   }"/>

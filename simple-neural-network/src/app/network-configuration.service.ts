@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { Neuron } from "./neuron";
 import { BehaviorSubject } from "rxjs";
 import { Connection } from "./connection";
+import { Layer } from "./layer";
 
 @Injectable({
 	providedIn: 'root',
@@ -11,17 +12,24 @@ import { Connection } from "./connection";
  */
 export class NetworkConfigurationService {
 	impulseDropoff: number; //How quickly neuron discharges potential
-  private connectionsArray: Array<Connection> = new Array<Connection>(); //connections in Neural Network
+  private layersArray: Array<Layer> = new Array<Layer>(); //neurons in Neural Network
   private neuronsArray: Array<Neuron> = new Array<Neuron>(); //neurons in Neural Network
+  private connectionsArray: Array<Connection> = new Array<Connection>(); //connections in Neural Network
   //Send out which neurons are being stimulated
-	private neuronStimulationSubject$ = new BehaviorSubject<Connection>(new Connection(new Neuron(-1, -1, -1), new Neuron(-1, -1, -1),  0));
+	private neuronStimulationSubject$ = new BehaviorSubject<Connection>(new Connection(new Neuron(-1, new Layer(-1), -1), new Neuron(-1, new Layer(-1), -1),  0));
 	neuronStimulation$ = this.neuronStimulationSubject$.asObservable();
 	constructor() {
 		this.impulseDropoff = 1;
 	}
 
-  addNeuron(layer: number, position: number): Neuron {
-    let neuron = new Neuron(this.neuronsArray.length, layer, position);
+  addLayer() {
+    let layer = new Layer(this.layersArray.length + 1);
+    this.layersArray.push(layer);
+    return layer;
+  }
+
+  addNeuron(id: number, layer: Layer, position: number): Neuron {
+    let neuron = new Neuron(id, layer, position);
     this.neuronsArray.push(neuron);
     return neuron;
   }
@@ -42,5 +50,11 @@ export class NetworkConfigurationService {
       .forEach((connection) => {
         this.neuronStimulationSubject$.next(connection);
       });
+  }
+
+  clearNetwork() {
+    this.layersArray = new Array<Layer>(); //neurons in Neural Network
+    this.neuronsArray = new Array<Neuron>(); //neurons in Neural Network
+    this.connectionsArray = new Array<Connection>(); //connections in Neural Network
   }
 }
