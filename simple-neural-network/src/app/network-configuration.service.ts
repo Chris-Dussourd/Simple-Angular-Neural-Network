@@ -11,7 +11,6 @@ import { Layer } from "./layer";
  * Constants used in defining how the network operates
  */
 export class NetworkConfigurationService {
-	impulseDropoff: number; //How quickly neuron discharges potential
   private layersArray: Array<Layer> = new Array<Layer>(); //neurons in Neural Network
   private neuronsArray: Array<Neuron> = new Array<Neuron>(); //neurons in Neural Network
   private connectionsArray: Array<Connection> = new Array<Connection>(); //connections in Neural Network
@@ -19,7 +18,6 @@ export class NetworkConfigurationService {
 	private neuronStimulationSubject$ = new BehaviorSubject<Connection>(new Connection(new Neuron(-1, new Layer(-1), -1), new Neuron(-1, new Layer(-1), -1),  0));
 	neuronStimulation$ = this.neuronStimulationSubject$.asObservable();
 	constructor() {
-		this.impulseDropoff = 1;
 	}
 
   addLayer() {

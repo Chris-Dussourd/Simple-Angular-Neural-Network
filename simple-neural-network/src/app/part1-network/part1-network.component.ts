@@ -16,11 +16,11 @@ export class Part1Network {
   neurons: Array<INeuron> = []
   connections: Array<IConnection> = [];
   layers: Array<ILayer> = [];
-  maxNeuronsInLayer: number;
+  neuronSpacing: number;
   loaded: boolean = false;
   constructor(private networkConfig: NetworkConfigurationService) {
     networkConfig.clearNetwork();
-    this.maxNeuronsInLayer = 3;
+    this.neuronSpacing = 150;
 
     //Create 4 layers
     this.layers.push(networkConfig.addLayer());
@@ -48,6 +48,12 @@ export class Part1Network {
     this.layers[2].neuronCount = 3;
     this.layers[3].neuronCount = 1;
 
+    //Add Spacing between neurons in layer
+    this.layers[0].spacing = this.neuronSpacing;
+    this.layers[1].spacing = 0;
+    this.layers[2].spacing = 0;
+    this.layers[3].spacing = this.neuronSpacing;
+
     //Add connection to stimlate base neuron with a button
     this.baseConnection = networkConfig.addConnection(this.buttonNeuron, this.neurons[0], this.baseWeight);
 
@@ -69,7 +75,7 @@ export class Part1Network {
     this.connections.push(networkConfig.addConnection(this.neurons[4], this.neurons[7], 1));
     this.connections.push(networkConfig.addConnection(this.neurons[5], this.neurons[7], 1));
     this.connections.push(networkConfig.addConnection(this.neurons[6], this.neurons[7], 1));
-    debugger;
+
     this.loaded = true;
   }
 

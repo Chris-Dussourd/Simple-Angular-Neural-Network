@@ -16,11 +16,17 @@ export class Part2Network {
   neurons: Array<INeuron> = []
   connections: Array<IConnection> = [];
   layers: Array<ILayer> = [];
-  maxNeuronsInLayer: number;
+  neuronSpacing: number;
   loaded: boolean = false;
+  maxNeuronId: number;
+  maxNeuronsInOneLayer: number; //Max neurons present in one layer
+  toggleConnections: boolean = false; //Toggle to refresh connection components (update with new data)
+
   constructor(private networkConfig: NetworkConfigurationService) {
     networkConfig.clearNetwork();
-    this.maxNeuronsInLayer = 3;
+    this.neuronSpacing = 150;
+    this.maxNeuronId = 8;
+    this.maxNeuronsInOneLayer = 3;
 
     //Create 4 layers
     this.layers.push(networkConfig.addLayer());
@@ -47,6 +53,12 @@ export class Part2Network {
     this.layers[1].neuronCount = 3;
     this.layers[2].neuronCount = 3;
     this.layers[3].neuronCount = 1;
+
+    //Add Spacing between neurons in layer
+    this.layers[0].spacing = this.neuronSpacing;
+    this.layers[1].spacing = 0;
+    this.layers[2].spacing = 0;
+    this.layers[3].spacing = this.neuronSpacing;
 
     //Add connection to stimlate base neuron with a button
     this.baseConnection = networkConfig.addConnection(this.buttonNeuron, this.neurons[0], this.baseWeight);
@@ -101,6 +113,68 @@ export class Part2Network {
     })
   }
 
+  addNeuron(neuronLayer: ILayer) {
+    debugger;
+    neuronLayer.neuronCount += 1;
+    this.maxNeuronId += 1;
+    let layerNeurons = this.neurons.filter((neuron) => neuron.layer.id == neuronLayer.id);
+
+    //Need to change spacing of all other neurons in network if this layer holds the max number of neurons
+    if (layerNeurons.length === this.maxNeuronsInOneLayer) {
+      this.maxNeuronsInOneLayer += 1;
+      this.layers.forEach((layer) => {
+        layer.spacing = this.getNeuronSpacing(layer)
+      });
+    } else {
+      neuronLayer.spacing = this.getNeuronSpacing(neuronLayer);
+    }
+    this.neurons.push(this.networkConfig.addNeuron(this.maxNeuronId, neuronLayer, neuronLayer.neuronCount));
+    this.toggleConnections = !this.toggleConnections;
+  }
+
   removeNeuron(removeNeuron: INeuron) {
+    removeNeuron.layer.neuronCount -= 1;
+    if (this.maxNeuronId === removeNeuron.id) this.maxNeuronId -= 1;
+    this.neurons.forEach((neuron) => {
+      if (neuron.layer.id === removeNeuron.layer.id && neuron.position > removeNeuron.position) {
+        neuron.position -= 1;
+      }
+    });
+
+    //Change the spacing in the network if removing from max neuron's layer
+    if (removeNeuron.layer.neuronCount + 1 === this.maxNeuronsInOneLayer &&
+        !this.layers.some((layer) => layer.neuronCount === this.maxNeuronsInOneLayer)) {
+      this.maxNeuronsInOneLayer -= 1;
+      this.layers.forEach((layer) => {
+        layer.spacing = this.getNeuronSpacing(layer)
+      });
+    } else {
+      removeNeuron.layer.spacing = this.getNeuronSpacing(removeNeuron.layer);
+    }
+
+    //Remove the connection to and from this neuron
+    let neuronConnections = this.connections
+      .filter((connection) =>
+        removeNeuron.id === connection.inputNeuron.id || removeNeuron.id === connection.outputNeuron.id
+      );
+    neuronConnections.forEach((connection) => this.removeConnection(connection));
+    this.neurons = this.neurons.filter((neuron) => neuron.id != removeNeuron.id);
+    this.toggleConnections = !this.toggleConnections;
+  }
+
+  removeConnection(connection: IConnection) {
+
+  }
+
+  neuronEvent(event: any) {
+    if (event.action === 'Remove') {
+      this.removeNeuron(event.neuron);
+    }
+  }
+
+  getNeuronSpacing(layer: ILayer): number {
+    return layer.neuronCount === this.maxNeuronsInOneLayer
+      ? 0
+      : (this.maxNeuronsInOneLayer - 1)/(layer.neuronCount + 1)*this.neuronSpacing;
   }
 }

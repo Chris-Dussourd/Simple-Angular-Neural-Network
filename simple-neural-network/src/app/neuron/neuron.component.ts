@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NetworkConfigurationService } from '../network-configuration.service';
 import { Subscription } from 'rxjs';
 import { Connection } from '../connection';
@@ -13,22 +13,19 @@ export class NeuronComponent {
   @Input() neuron: Neuron;
   @Input() marginLeft: number = 0;
   @Input() marginTop: number = 0;
-  @Input() maxNeuronsInLayer: number = 1;
   @Input() neuronSpacing: number = 150;
+
+  @Output() neuronEvent = new EventEmitter<{action: string, neuron: Neuron}>();
+
+  selected: boolean = false; //Whether user selected the neuron
   potential: number;
-  impulseDropoff: number;
 	stimulationSubscription: Subscription;
-  layerSpacing: number = 0; //Add spacing to make consistent with other layers in network
+
   constructor(private networkConfig: NetworkConfigurationService) {
     this.potential = 0;
-    this.impulseDropoff = networkConfig.impulseDropoff;
   }
 
 	ngOnInit(): void {
-    this.layerSpacing = this.neuron.layer.neuronCount === this.maxNeuronsInLayer
-      ? 0
-      : ((this.maxNeuronsInLayer-1)/(this.neuron.layer.neuronCount + 1))*this.neuronSpacing;
-    debugger;
 		this.stimulationSubscription = this.networkConfig.neuronStimulation$.subscribe((connection: Connection) => {
 				if (connection.outputNeuron.id === this.neuron.id) {
           this.potential = this.potential + connection.weight*100;
@@ -41,4 +38,16 @@ export class NeuronComponent {
         }
 			});
     }
+
+  ngOnDestroy(): void {
+    this.stimulationSubscription.unsubscribe();
+  }
+
+  selectNeuron(): void {
+    this.selected = !this.selected;
+  }
+
+  removeNeuron(): void {
+    this.neuronEvent.emit({ action: 'Remove', neuron: this.neuron });
+  }
 }

@@ -6,7 +6,7 @@
   <p>Lastly, you can add connections to your new neurons. First select one neuron, select a second neuron, and then click "Add Connection".
     Click a neuron second time to de-select it. Note: You can now add connections to neurons a few layers ahead or within the same layer.</p>
 </div>
-<div *ngIf="loaded">
+<div *ngIf="loaded" style="position:relative">
   <button type="button" (click)="stimulateBaseNeuron($event)"
     [ngStyle]="{
       'position': 'relative',
@@ -25,14 +25,14 @@
     }"/>
   <button (click)="addLayer($event)"
     [ngStyle]="{
-      'position': 'fixed',
-      'height.px': neurons.length*45,
+      'position': 'absolute',
+      'height.px': maxNeuronsInOneLayer*150 - 75,
       'margin-left.px': (layers.length-1)*150,
       'margin-top.px': 70,
       'background-color': 'light-grey'
     }">Add Layer
   </button>
-  <div [ngStyle]="{ 'position': 'relative', 'top.px': 440, 'left.px': -40, 'font-weight': 'bold' }">
+  <div [ngStyle]="{ 'position': 'relative', 'top.px': maxNeuronsInOneLayer*150, 'left.px': -40, 'font-weight': 'bold' }">
     <span *ngFor="let layer of layers">
       <span [ngStyle]="{ 'padding-left.px': 100 }">Layer {{layer.id}}</span>
     </span>
@@ -42,12 +42,29 @@
         <button (click)="removeLayer(layer)" [ngStyle]="{ 'margin-left.px': 87 }">Remove</button>
       </span>
     </div>
+    <div style="margin-left:20px" >
+      <span *ngFor="let layer of layers">
+        <button (click)="addNeuron(layer)" [ngStyle]="{ 'margin-left.px': 65.5 }">Add Neuron</button>
+      </span>
+    </div>
   </div>
   <div *ngFor="let neuron of neurons">
-    <neuron [neuron]="neuron" [marginLeft]="-50" [marginTop]="220" [maxNeuronsInLayer]="maxNeuronsInLayer"></neuron>
+    <neuron
+      [neuron]="neuron"
+      [marginLeft]="-50"
+      [marginTop]="-200"
+      [neuronSpacing]="neuronSpacing"
+      (neuronEvent)="neuronEvent($event)">
+    </neuron>
   </div>
   <div *ngFor="let connect of connections">
-    <connection [neuronConnection]="connect" [marginLeft]="-50" [marginTop]="220" [maxNeuronsInLayer]="maxNeuronsInLayer"></connection>
+    <connection
+      [neuronConnection]="connect"
+      [marginLeft]="-50"
+      [marginTop]="-200"
+      [neuronSpacing]="neuronSpacing"
+      [toggle]="toggleConnections">
+    </connection>
   </div>
 </div>
 
