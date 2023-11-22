@@ -1,22 +1,47 @@
-<svg overflow="visible">
+<svg>
   <line class="connection-line"
-    [attr.x1]="connectionX1"
-    [attr.x2]="connectionX2"
-    [attr.y1]="connectionY1"
-    [attr.y2]="connectionY2"
-    stroke="black"></line>
+    [attr.x1]="neuronConnection.positionX1"
+    [attr.x2]="neuronConnection.positionX2"
+    [attr.y1]="neuronConnection.positionY1"
+    [attr.y2]="neuronConnection.positionY2"
+    [attr.stroke]="selected ? 'orange' : 'black'">
+  </line>
   <circle class="connection-end"
-    [attr.cx]="connectionX2"
-    [attr.cy]="connectionY2"
+    [attr.cx]="neuronConnection.positionX2"
+    [attr.cy]="neuronConnection.positionY2"
     r="5"
-    stroke="black"></circle>
+    [attr.stroke]="selected ? 'orange' : 'black'"
+    [style.fill]="selected ? 'orange' : 'black'">
+  </circle>
 </svg>
 <input [(ngModel)]="weight" (keyup.enter)="updateWeight($event)" (blur)="updateWeight($event)"
   [ngStyle]="{
     'background-color': 'green',
     'color': 'white',
-    'position': 'relative',
-    'top.px': connectionY1 + (connectionY2 - connectionY1)/5 - 145,
-    'left.px': connectionX1 + (connectionX2 - connectionX1)/5 - 310,
-    'width.px': 25
+    'position': 'absolute',
+    'top.px': neuronConnection.positionY1 + (neuronConnection.positionY2 - neuronConnection.positionY1)/5 - 12,
+    'left.px': neuronConnection.positionX1 + (neuronConnection.positionX2 - neuronConnection.positionX1)/5,
+    'width.px': 25,
+    'z-index': 3
   }"/>
+<button (click)="selectConnection()"
+  class="line-button"
+  [ngStyle]="{
+    'position': 'absolute',
+    'top.px': (neuronConnection.positionY1 + neuronConnection.positionY2)/2 - 5,
+    'left.px': neuronConnection.lineButtonX,
+    'width.px': neuronConnection.lineWidth,
+    'height': '5px',
+    'transform': neuronConnection.lineButtonTransform,
+    'z-index': 2
+  }">
+</button>
+<button (click)="removeConnection()"
+  [ngStyle]="{
+    'position': 'absolute',
+    'top.px': (neuronConnection.positionY1 + neuronConnection.positionY2)/2,
+    'left.px': (neuronConnection.positionX1 + neuronConnection.positionX2)/2,
+    'display': selected ? 'block' : 'none',
+    'z-index': 2
+  }">Remove
+</button>

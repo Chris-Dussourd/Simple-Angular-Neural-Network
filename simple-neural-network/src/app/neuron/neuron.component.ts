@@ -11,8 +11,6 @@ import { Neuron } from '../neuron';
 })
 export class NeuronComponent {
   @Input() neuron: Neuron;
-  @Input() marginLeft: number = 0;
-  @Input() marginTop: number = 0;
   @Input() neuronSpacing: number = 150;
 
   @Output() neuronEvent = new EventEmitter<{action: string, neuron: Neuron}>();
@@ -20,8 +18,9 @@ export class NeuronComponent {
   selected: boolean = false; //Whether user selected the neuron
   potential: number;
 	stimulationSubscription: Subscription;
+  layerSpacing: number = 0; //Add spacing to make consistent with other layers in network
 
-  constructor(private networkConfig: NetworkConfigurationService) {
+  constructor(public networkConfig: NetworkConfigurationService) {
     this.potential = 0;
   }
 
@@ -45,6 +44,7 @@ export class NeuronComponent {
 
   selectNeuron(): void {
     this.selected = !this.selected;
+    this.neuronEvent.emit({ action: 'Selected', neuron: this.neuron })
   }
 
   removeNeuron(): void {

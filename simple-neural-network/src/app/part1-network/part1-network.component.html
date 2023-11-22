@@ -16,7 +16,7 @@
         'top.px': 10
       }"
     >Stimulate First Neuron</button>
-    <input [(ngModel)]="baseWeight" (keyup.enter)="updateBaseWeight($event)" (blur)="updateBaseWeight($event)"
+    <input [(ngModel)]="baseWeight"
       [ngStyle]="{
         'background-color': 'green',
         'color': 'white',
@@ -26,10 +26,10 @@
         'top.px': 10
       }"/>
     <div *ngFor="let neuron of neurons">
-      <neuron [neuron]="neuron" [marginLeft]="-50" [marginTop]="220" [neuronSpacing]="neuronSpacing"></neuron>
+      <neuron [neuron]="neuron" [neuronSpacing]="networkConfig.neuronSpacing"></neuron>
     </div>
     <div *ngFor="let connect of connections">
-      <connection [neuronConnection]="connect" [marginLeft]="-50" [marginTop]="220" [neuronSpacing]="neuronSpacing"></connection>
+      <connection [neuronConnection]="connect" [neuronSpacing]="networkConfig.neuronSpacing"></connection>
     </div>
     <div [ngStyle]="{ 'position': 'relative', 'top.px': 420, 'left.px': 60, 'font-weight': 'bold' }">
       <span>Layer 1</span>

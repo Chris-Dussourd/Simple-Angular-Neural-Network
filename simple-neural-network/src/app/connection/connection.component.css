@@ -3,4 +3,31 @@
   top: 0;
   left: 0;
   transform: translate(0, 100%);
+  z-index: -1;
+}
+
+svg {
+  overflow: visible;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 1px;
+  width: 1px;
+  z-index: -1;
+}
+
+/* Make the button in the shape of a line */
+.line-button {
+  background-color: transparent; /* Set the background color to transparent */
+  color: #000; /* Set the text color */
+  padding: 8px 16px; /* Adjust padding as needed */
+  cursor: pointer; /* Set cursor to pointer for better usability */
+  text-decoration: none; /* Remove default underline for links */
+  display: inline-block; /* Ensure the button takes the width of its content */
+  border: none;
+}
+
+/* Add hover effect if desired */
+.line-button:hover {
+  background-color: transparent; /* Change background color on hover */
 }

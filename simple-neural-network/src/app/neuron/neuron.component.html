@@ -1,22 +1,22 @@
 
-<svg overflow="visible">
+<svg>
   <circle class="neuron-hole"
-    [attr.cx]="neuronSpacing*neuron.layer.id+marginLeft"
-    [attr.cy]="neuronSpacing*neuron.position+marginTop+neuron.layer.spacing"
+    [attr.cx]="neuron.positionX"
+    [attr.cy]="neuron.positionY"
     r="30"
     fill="#fff"></circle>
 
   <circle class="neuron-ring"
-    [attr.cx]="neuronSpacing*neuron.layer.id+marginLeft"
-    [attr.cy]="neuronSpacing*neuron.position+marginTop+neuron.layer.spacing"
+    [attr.cx]="neuron.positionX"
+    [attr.cy]="neuron.positionY"
     r="30"
     fill="transparent"
     stroke="#d2d3d4"
     stroke-width="3"></circle>
 
   <circle class="neuron-potential"
-    [attr.cx]="neuronSpacing*neuron.layer.id+marginLeft"
-    [attr.cy]="neuronSpacing*neuron.position+marginTop+neuron.layer.spacing"
+    [attr.cx]="neuron.positionX"
+    [attr.cy]="neuron.positionY"
     r="30"
     fill="transparent"
     stroke="blue"
@@ -25,22 +25,24 @@
 </svg>
 <button (click)="selectNeuron()"
   [ngStyle]="{
-    'position': 'fixed',
-    'top.px': neuronSpacing*neuron.position + marginTop + neuron.layer.spacing - 30,
-    'left.px': neuronSpacing*neuron.layer.id + marginLeft-30,
+    'position': 'absolute',
+    'left.px': neuron.positionX - 30,
+    'top.px': neuron.positionY - 30,
     'border-radius': '50%',
     'width': '60px',
     'height': '60px',
     'background-color': selected ? 'orange' : 'transparent',
-    'border': 'none'
+    'border': 'none',
+    'z-index': 3
   }">{{ potential }}
 </button>
 <button (click)="removeNeuron()"
   [ngStyle]="{
-    'position': 'fixed',
-    'top.px': neuronSpacing*neuron.position + marginTop + neuron.layer.spacing + 30,
-    'left.px': neuronSpacing*neuron.layer.id + marginLeft-30,
-    'display': selected ? 'block' : 'none'
+    'position': 'absolute',
+    'left.px': neuron.positionX - 30,
+    'top.px': neuron.positionY - 30,
+    'display': selected ? 'block' : 'none',
+    'z-index': 4
   }">Remove
 </button>
 
