@@ -1,10 +1,9 @@
 <div [ngStyle]="{ 'width': '700px' }">
-  <h1 style="text-align:center">Part 2</h1>
-  <a routerLink="/part1" style="position:relative;z-index:1">Part 1</a><a routerLink="/part3" style="float:right">Part 3</a>
-  <p>You can now add layers and neurons to each of the layers in the network. Try adding a few more neurons to the network.</p>
-  <p>In addition, you can remove the added neurons by selecting the neuron and clicking the trash can icon.</p>
-  <p>Lastly, you can add connections to your new neurons. First select one neuron, select a second neuron, and then click "Add Connection".
-    Click a neuron second time to de-select it. Note: You can now add connections to neurons a few layers ahead or within the same layer.</p>
+  <h1 style="text-align:center">Part 3 (In Progress...)</h1>
+  <a routerLink="/part2" style="position:relative;z-index:1">Part 2</a><a routerLink="/part4" style="float:right">Part 4</a>
+  <p>In part 3, we will add the ability to define an input signal to the neural network. Instead of pressing a button to stimulate the neuron, the stimulation pattern is defined ahead of time and you play the stimulation pattern by pressing the button.</p>
+  <p>Right now, the neuron is set to stimulate the neuron 3 times in a 5 second window. Try pressing play.</p>
+  <p>You can update the pattern by clicking the pencil icon next to the play button. This will bring a window where you can click to add additional stimulation and change the time scale.</p>
 </div>
 <div
   *ngIf="{

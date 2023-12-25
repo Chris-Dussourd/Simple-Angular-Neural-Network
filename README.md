@@ -31,4 +31,9 @@ Users will be able to edit the weights of each of the connections to other neuro
 
 ## Part 2
 
-The user can add/remove layers, neurons, and connections.
+The user can add/remove layers, neurons, and connections
+
+## Part 3
+
+Neurons are created based on a more realistic model (Hodgkin-Huxley).
+User can update parameters based on this model.
