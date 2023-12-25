@@ -35,5 +35,4 @@ The user can add/remove layers, neurons, and connections
 
 ## Part 3
 
-Neurons are created based on a more realistic model (Hodgkin-Huxley).
-User can update parameters based on this model.
+You can define an input signal to send to the network. On press of the button, it sends the input signal to stimulate the neuron(s) in the first layer of the network.

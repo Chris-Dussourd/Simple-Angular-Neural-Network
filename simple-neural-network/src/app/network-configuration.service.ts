@@ -183,6 +183,8 @@ export class NetworkConfigurationService {
     this.layersArray = new Array<Layer>(); //neurons in Neural Network
     this.neuronsArray = new Array<Neuron>(); //neurons in Neural Network
     this.connectionsArray = new Array<Connection>(); //connections in Neural Network
+    this.neighborsArray = new Array<{neuron1: Neuron, neuron2: Neuron}>();
+    this.maxNeuronsInOneLayer = 0;
   }
 
   getNeuronSpacing(layer: Layer): number {

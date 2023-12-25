@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NetworkConfigurationService } from '../network-configuration.service';
 import { Neuron } from '../neuron';
 import { Layer } from '../layer';
@@ -8,58 +8,62 @@ import { Layer } from '../layer';
   templateUrl: './part2-network.component.html',
   styleUrls: ['./part2-network.component.css']
 })
-export class Part2Network {
+export class Part2Network implements OnInit {
   buttonNeuron: Neuron;
   baseWeight: number; //weight between button and neuron0
-  loaded: boolean = false;
   maxLayerId: number;
   maxNeuronId: number;
   maxConnectionId: number;
 
   constructor(public networkConfig: NetworkConfigurationService) {
-    networkConfig.clearNetwork();
-    networkConfig.setMargins(-50, -50);
+  }
+
+  ngOnInit(): void {
+    this.networkConfig.clearNetwork();
+    this.initializeNetwork();
+  }
+
+  initializeNetwork() {
+    this.networkConfig.setMargins(-50, -50);
     this.maxLayerId = 4;
     this.maxNeuronId = 8;
     this.maxConnectionId = 13;
     this.baseWeight = 1;
 
     //Create 4 layers
-    let layer1 = networkConfig.addLayer(1);
-    let layer2 = networkConfig.addLayer(2);
-    let layer3 = networkConfig.addLayer(3);
-    let layer4 = networkConfig.addLayer(4);
+    let layer1 = this.networkConfig.addLayer(1);
+    let layer2 = this.networkConfig.addLayer(2);
+    let layer3 = this.networkConfig.addLayer(3);
+    let layer4 = this.networkConfig.addLayer(4);
 
     //Add 8 neurons
-    let neuron1 = networkConfig.addNeuron(1, layer1); //Starting neuron
-    let neuron2 = networkConfig.addNeuron(2, layer2);
-    let neuron3 = networkConfig.addNeuron(3, layer2);
-    let neuron4 = networkConfig.addNeuron(4, layer2);
-    let neuron5 = networkConfig.addNeuron(5, layer3);
-    let neuron6 = networkConfig.addNeuron(6, layer3);
-    let neuron7 = networkConfig.addNeuron(7, layer3);
-    let neuron8 = networkConfig.addNeuron(8, layer4);
+    let neuron1 = this.networkConfig.addNeuron(1, layer1); //Starting neuron
+    let neuron2 = this.networkConfig.addNeuron(2, layer2);
+    let neuron3 = this.networkConfig.addNeuron(3, layer2);
+    let neuron4 = this.networkConfig.addNeuron(4, layer2);
+    let neuron5 = this.networkConfig.addNeuron(5, layer3);
+    let neuron6 = this.networkConfig.addNeuron(6, layer3);
+    let neuron7 = this.networkConfig.addNeuron(7, layer3);
+    let neuron8 = this.networkConfig.addNeuron(8, layer4);
 
     //Add connections from 1st layer to 2nd layer
-    networkConfig.addConnection(1, neuron1, neuron2, 1);
-    networkConfig.addConnection(2, neuron1, neuron3, 1);
-    networkConfig.addConnection(3, neuron1, neuron4, 1);
+    this.networkConfig.addConnection(1, neuron1, neuron2, 1);
+    this.networkConfig.addConnection(2, neuron1, neuron3, 1);
+    this.networkConfig.addConnection(3, neuron1, neuron4, 1);
 
     //Add connections from 2nd layer to 3rd layer
-    networkConfig.addConnection(4, neuron2, neuron5, 1);
-    networkConfig.addConnection(5, neuron2, neuron6, 1);
-    networkConfig.addConnection(6, neuron3, neuron5, 1);
-    networkConfig.addConnection(7, neuron3, neuron6, 1);
-    networkConfig.addConnection(8, neuron3, neuron7, 1);
-    networkConfig.addConnection(9, neuron4, neuron6, 1);
-    networkConfig.addConnection(10, neuron4, neuron7, 1);
+    this.networkConfig.addConnection(4, neuron2, neuron5, 1);
+    this.networkConfig.addConnection(5, neuron2, neuron6, 1);
+    this.networkConfig.addConnection(6, neuron3, neuron5, 1);
+    this.networkConfig.addConnection(7, neuron3, neuron6, 1);
+    this.networkConfig.addConnection(8, neuron3, neuron7, 1);
+    this.networkConfig.addConnection(9, neuron4, neuron6, 1);
+    this.networkConfig.addConnection(10, neuron4, neuron7, 1);
 
     //Add connections from 3rd layer to 4th layer
-    networkConfig.addConnection(11, neuron5, neuron8, 1);
-    networkConfig.addConnection(12, neuron6, neuron8, 1);
-    networkConfig.addConnection(13, neuron7, neuron8, 1);
-
-    this.loaded = true;
+    this.networkConfig.addConnection(11, neuron5, neuron8, 1);
+    this.networkConfig.addConnection(12, neuron6, neuron8, 1);
+    this.networkConfig.addConnection(13, neuron7, neuron8, 1);
   }
 
   stimulateBaseNeuron(event: any) {
