@@ -7,6 +7,7 @@ import { NeuronComponent } from './neuron/neuron.component';
 import { ConnectionComponent } from './connection/connection.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button'
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     CommonModule,
-    FormsModule
+    FormsModule,
+    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -9,7 +9,7 @@
     How much will one neuron stimulate another neuron when it fires? Try adjusting these weights to see the effect on the network.
   </p>
   <div *ngIf="loaded">
-    <button type="button" (click)="stimulateBaseNeuron($event)"
+    <button mat-raised-button color="primary" (click)="stimulateBaseNeuron($event)"
       [ngStyle]="{
         'position': 'relative',
         'left.px': 210,

@@ -14,11 +14,11 @@
     neighbors: networkConfig.unconnectedNeighbors$ | async
   } as data"
   style="position:absolute">
-  <button type="button" (click)="stimulateBaseNeuron($event)"
+  <button mat-raised-button color="primary" (click)="stimulateBaseNeuron($event)"
     [ngStyle]="{
       'position': 'absolute',
       'left.px': 210,
-      'top.px': 30
+      'top.px': 20
     }"
   >Stimulate First Neuron</button>
   <input [(ngModel)]="baseWeight"
@@ -26,32 +26,33 @@
       'background-color': 'green',
       'color': 'white',
       'position': 'absolute',
-      'left.px': 370,
+      'left.px': 420,
       'width.px': 25,
       'top.px': 30
     }"/>
-  <button (click)="addLayer($event)"
+  <button mat-raised-button (click)="addLayer($event)"
     [ngStyle]="{
       'position': 'absolute',
       'height.px': getLayerHeight(data.layers ?? []) - 75,
-      'margin-left.px': ((data.layers ?? []).length)*150,
+      'left.px': ((data.layers ?? []).length)*160,
       'margin-top.px': 70,
-      'background-color': 'light-grey'
+      'background-color': 'light-grey',
+      'z-index': 2
     }">Add Layer
   </button>
-  <div [ngStyle]="{ 'position': 'relative', 'top.px': getLayerHeight(data.layers ?? []), 'left.px': -40, 'font-weight': 'bold' }">
+  <div [ngStyle]="{ 'position': 'relative', 'top.px': getLayerHeight(data.layers ?? []), 'left.px': -20, 'font-weight': 'bold' }">
     <span *ngFor="let layer of data.layers">
-      <span [ngStyle]="{ 'padding-left.px': 100, 'font-size.px': 16, 'font-family': 'Times New Roman' }">Layer {{layer.position}}</span>
+      <span [ngStyle]="{ 'padding-left.px': 95, 'font-size.px': 16, 'font-family': 'Times New Roman' }">Layer {{layer.position}}</span>
     </span>
     <br>
     <div [ngStyle]="{ 'margin-left':'5px', 'display': (data.layers ?? []).length < 2 ? 'none' : 'inline' }" >
       <span *ngFor="let layer of data.layers">
-        <button (click)="removeLayer(layer)" [ngStyle]="{ 'margin-left.px': 92, 'font-size.px': 13.5, 'font-family': 'Times New Roman' }">Remove</button>
+        <button mat-raised-button color="warn" (click)="removeLayer(layer)" [ngStyle]="{ 'margin-left.px': 67, 'font-size.px': 13.5, 'font-family': 'Times New Roman' }">Remove</button>
       </span>
     </div>
     <div style="margin-left:20px" >
       <span *ngFor="let layer of data.layers">
-        <button (click)="addNeuron(layer)" [ngStyle]="{ 'margin-left.px': 69.5, 'font-size.px': 13.5, 'font-family': 'Times New Roman' }">Add Neuron</button>
+        <button mat-raised-button color="primary" (click)="addNeuron(layer)" [ngStyle]="{ 'margin-left.px': 40, 'font-size.px': 13.5, 'font-family': 'Times New Roman' }">Add Neuron</button>
       </span>
     </div>
   </div>
