@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NetworkConfigurationService } from '../network-configuration.service';
 import { Neuron } from '../neuron';
 import { Layer } from '../layer';
+import { MatDialog } from '@angular/material/dialog';
+import { InputSignalComponent } from '../input-signal/input-signal.component';
 
 @Component({
   selector: 'part3-network',
@@ -14,8 +16,9 @@ export class Part3Network implements OnInit {
   maxLayerId: number;
   maxNeuronId: number;
   maxConnectionId: number;
+  playIcon: string = 'play_arrow';
 
-  constructor(public networkConfig: NetworkConfigurationService) {
+  constructor(public networkConfig: NetworkConfigurationService, public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -66,7 +69,11 @@ export class Part3Network implements OnInit {
     this.networkConfig.addConnection(13, neuron7, neuron8, 1);
   }
 
-  stimulateBaseNeuron(event: any) {
+  openInputSignalEditor(event: any) {
+    this.dialog.open(InputSignalComponent)
+  }
+
+  playInputSignal(event: any) {
     this.networkConfig.stimulateBase(this.baseWeight);
   }
 

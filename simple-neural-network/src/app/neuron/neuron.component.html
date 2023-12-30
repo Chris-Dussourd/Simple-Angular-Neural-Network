@@ -36,11 +36,11 @@
     'z-index': 3
   }">{{ potential }}
 </button>
-<button (click)="removeNeuron()"
+<button mat-raised-button color="warn" (click)="removeNeuron()"
   [ngStyle]="{
     'position': 'absolute',
-    'left.px': neuron.positionX - 30,
-    'top.px': neuron.positionY - 30,
+    'left.px': neuron.positionX - 50,
+    'top.px': neuron.positionY + 20,
     'display': selected ? 'block' : 'none',
     'z-index': 4
   }">Remove

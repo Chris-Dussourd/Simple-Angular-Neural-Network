@@ -13,21 +13,35 @@
     neighbors: networkConfig.unconnectedNeighbors$ | async
   } as data"
   style="position:absolute">
-  <button mat-raised-button color="primary" (click)="stimulateBaseNeuron($event)"
+  <mat-icon color="primary" (click)="openInputSignalEditor($event)"
     [ngStyle]="{
       'position': 'absolute',
-      'left.px': 210,
+      'left.px': 230,
       'top.px': 20
     }"
-  >Stimulate First Neuron</button>
+  >edit</mat-icon>
+  <mat-icon *ngIf="playIcon" color="primary" (click)="playInputSignal($event)"
+    [ngStyle]="{
+      'position': 'absolute',
+      'left.px': 270,
+      'top.px': 20
+    }"
+  >{{playIcon}}</mat-icon>
+  <mat-icon color="primary" (click)="playInputSignal($event)"
+    [ngStyle]="{
+      'position': 'absolute',
+      'left.px': 310,
+      'top.px': 20
+    }"
+  >stop_circle</mat-icon>
   <input [(ngModel)]="baseWeight"
     [ngStyle]="{
       'background-color': 'green',
       'color': 'white',
       'position': 'absolute',
-      'left.px': 420,
+      'left.px': 370,
       'width.px': 25,
-      'top.px': 30
+      'top.px': 20
     }"/>
   <div [ngStyle]="{ 'position': 'relative', 'top.px': getLayerHeight(data.layers ?? []), 'left.px': -40, 'font-weight': 'bold' }">
     <span *ngFor="let layer of data.layers">

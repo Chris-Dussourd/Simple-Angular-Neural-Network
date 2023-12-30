@@ -36,7 +36,7 @@
     'z-index': 2
   }">
 </button>
-<button (click)="removeConnection()"
+<button mat-raised-button color="warn" (click)="removeConnection()"
   [ngStyle]="{
     'position': 'absolute',
     'top.px': (neuronConnection.positionY1 + neuronConnection.positionY2)/2,
