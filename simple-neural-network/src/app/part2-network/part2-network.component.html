@@ -30,16 +30,6 @@
       'width.px': 25,
       'top.px': 30
     }"/>
-  <button mat-raised-button (click)="addLayer($event)"
-    [ngStyle]="{
-      'position': 'absolute',
-      'height.px': getLayerHeight(data.layers ?? []) - 75,
-      'left.px': ((data.layers ?? []).length)*160,
-      'margin-top.px': 70,
-      'background-color': 'light-grey',
-      'z-index': 2
-    }">Add Layer
-  </button>
   <div [ngStyle]="{ 'position': 'relative', 'top.px': getLayerHeight(data.layers ?? []), 'left.px': -20, 'font-weight': 'bold' }">
     <span *ngFor="let layer of data.layers">
       <span [ngStyle]="{ 'padding-left.px': 95, 'font-size.px': 16, 'font-family': 'Times New Roman' }">Layer {{layer.position}}</span>
@@ -58,12 +48,14 @@
   </div>
   <div *ngFor="let neuron of data.neurons">
     <neuron
+      [ngStyle]="{'z-index': 3}"
       [neuron]="neuron"
       (neuronEvent)="neuronEvent($event)">
     </neuron>
   </div>
   <div *ngFor="let connect of data.connections">
     <connection
+      [ngStyle]="{'z-index': 4}"
       [neuronConnection]="connect"
       (connectionEvent)="connectionEvent($event)">
     </connection>
@@ -73,5 +65,15 @@
       (click)="addConnection(neighbor.neuron1, neighbor.neuron2)">Add Connection
     </button>
   </div>
+  <button mat-raised-button (click)="addLayer($event)"
+    [ngStyle]="{
+      'position': 'absolute',
+      'height.px': getLayerHeight(data.layers ?? []) - 75,
+      'left.px': ((data.layers ?? []).length)*160,
+      'top.px': 70,
+      'background-color': 'light-grey',
+      'z-index': 2
+    }">Add Layer
+  </button>
 </div>
 
